@@ -19,385 +19,608 @@
             min-height: 100vh;
         }
 
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #ffac25;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 100px 20px 20px;
         }
 
-        .header {
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Landing Page Styles */
+        .hero {
+            text-align: center;
+            margin-bottom: 80px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            text-align: center;
+            padding: 60px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 30px;
             background: linear-gradient(135deg, #ffac25, #ff6f00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .header .subtitle {
-            font-size: 1.3rem;
-            color: #666;
-            margin-bottom: 20px;
+        .hero-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            background-image: url('doorCropped.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin: 0 auto 30px;
         }
 
-        .contact-info {
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .hero-content .tagline {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
             display: flex;
-            justify-content: center;
-            gap: 30px;
+            gap: 20px;
             flex-wrap: wrap;
-            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ffac25, #ff6f00);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 172, 37, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffac25;
+            border: 2px solid #ffac25;
+        }
+
+        .btn-secondary:hover {
+            background: #ffac25;
+            color: white;
+        }
+
+        .hero-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #ffac25, #ff6f00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin: 0 auto 30px;
+        }
+
+        .about-section,
+        .contact-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #ffac25, #ff6f00);
+            border-radius: 2px;
+        }
+
+        .about-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: #555;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 15px;
             text-decoration: none;
-            transition: color 0.3s ease;
+            color: #333;
+            transition: all 0.3s ease;
+            border-left: 4px solid #ffac25;
         }
 
         .contact-item:hover {
-            color: #ffac25;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .section {
+        .contact-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        /* Portfolio Page Styles */
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 40px;
-            margin-bottom: 30px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
 
-        .section h2 {
-            font-size: 2rem;
-            margin-bottom: 25px;
-            color: #333;
-            position: relative;
+        .project-card:hover {
+            transform: translateY(-10px);
         }
 
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(135deg, #ffac25, #ff6f00);
-            border-radius: 2px;
-        }
-
-        .education-item, .experience-item, .project-item {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: rgba(102, 126, 234, 0.05);
-            border-radius: 15px;
-            border-left: 4px solid #ffac25;
-        }
-
-        .education-item h3, .experience-item h3, .project-item h3 {
-            font-size: 1.3rem;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        .education-item .institution, .experience-item .company {
-            font-weight: 600;
-            color: #ffac25;
-            margin-bottom: 5px;
-        }
-
-        .date {
-            color: #888;
-            font-style: italic;
+        .project-title {
+            font-size: 1.8rem;
             margin-bottom: 15px;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .skill-category {
-            background: rgba(102, 126, 234, 0.05);
-            padding: 20px;
-            border-radius: 15px;
-            border-left: 4px solid #ffac25;
-        }
-
-        .skill-category h4 {
             color: #333;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
         }
 
-        .skill-tags {
+        .project-tech {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
-        .skill-tag {
+        .tech-tag {
             background: linear-gradient(135deg, #ffac25, #ff6f00);
             color: white;
             padding: 5px 12px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
         }
 
-        .nav {
-            position: fixed;
-            top: 50%;
-            right: 30px;
-            transform: translateY(-50%);
-            z-index: 1000;
+        .project-description {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 25px;
         }
 
-        .nav-item {
-            display: block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            margin: 15px 0;
-            cursor: pointer;
+        .project-figure {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(255, 172, 37, 0.1), rgba(255, 111, 0, 0.1));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            color: #888;
+            font-style: italic;
+            border: 2px dashed #ffac25;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #ffac25, #ff6f00);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
             transition: all 0.3s ease;
         }
 
-        .nav-item.active {
-            background: #ffac25;
-            transform: scale(1.3);
+        .project-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 172, 37, 0.3);
         }
 
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            .header h1 {
+            .hero-content h1 {
                 font-size: 2.5rem;
             }
-            
-            .contact-info {
+
+            .hero-image {
+                width: 250px;
+                height: 250px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .container {
+                padding: 80px 15px 20px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-content {
                 flex-direction: column;
                 gap: 15px;
             }
-            
-            .nav {
-                display: none;
+
+            .navbar {
+                padding: 20px 0;
             }
-            
+
             .container {
-                padding: 15px;
-            }
-            
-            .section {
-                padding: 25px;
+                padding: 120px 15px 20px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="nav">
-        <div class="nav-item active" data-section="about"></div>
-        <div class="nav-item" data-section="education"></div>
-        <div class="nav-item" data-section="experience"></div>
-        <div class="nav-item" data-section="projects"></div>
-        <div class="nav-item" data-section="skills"></div>
-    </div>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-links">
+                <a class="nav-link active" onclick="showPage('landing')">About Me</a>
+                <a class="nav-link" onclick="showPage('projects')">Projects</a>
+            </div>
+        </div>
+    </nav>
 
     <div class="container">
-        <header class="header" id="about">
-            <h1>Mason duBoef</h1>
-            <p class="subtitle">Computer Science Graduate Student & AI Researcher</p>
-            <div class="contact-info">
-                <a href="mailto:mduboef@gmail.com" class="contact-item">
-                    <span>📧</span> mduboef@gmail.com
-                </a>
-                <a href="tel:702-513-4993" class="contact-item">
-                    <span>📞</span> (702) 513-4993
-                </a>
-                <a href="#" class="contact-item">
-                    <span>💼</span> LinkedIn
-                </a>
-                <a href="#" class="contact-item">
-                    <span>🐙</span> GitHub
-                </a>
-                <div class="contact-item">
-                    <span>📍</span> Amherst, MA
-                </div>
-            </div>
-        </header>
-
-        <section class="section" id="education">
-            <h2>Education</h2>
-            <div class="education-item">
-                <div class="institution">University of Massachusetts Amherst</div>
-                <h3>Master of Science in Computer Science</h3>
-                <div class="date">Expected December 2026</div>
-                <p>GPA: 3.85/4.0</p>
-            </div>
-            <div class="education-item">
-                <div class="institution">Rensselaer Polytechnic Institute</div>
-                <h3>Bachelor of Science in Computer Science</h3>
-                <div class="date">Graduated May 2023</div>
-                <p>Concentration in Artificial Intelligence & Data</p>
-                <p>GPA: 3.2/4.0</p>
-                <p>Dean's Honor List: Spring 2022, Spring 2023</p>
-            </div>
-        </section>
-
-        <section class="section" id="experience">
-            <h2>Experience</h2>
-            <div class="experience-item">
-                <div class="company">Jabbr</div>
-                <h3>Research Intern</h3>
-                <div class="date">Winter 2024 - Winter 2025</div>
-                <p>Developing the first-ever automated judging system for professional boxing using computer vision and neural networks. Scraped HD footage and scorecards from thousands of matches, using gradient descent to map statistical outputs onto judges' scores. System under review for official use by boxing commissions.</p>
-            </div>
-            <div class="experience-item">
-                <div class="company">Rensselaer Polytechnic Institute</div>
-                <h3>Undergraduate Research Assistant</h3>
-                <div class="date">Fall 2022 - Spring 2023</div>
-                <p>Backend Django development for OPRA voting platform under Professor Lirong Xia. Developed game-theoretic models for NYC subway toll pricing optimization using Nash equilibrium analysis.</p>
-            </div>
-            <div class="experience-item">
-                <div class="company">Mammoth Media</div>
-                <h3>Data Science Intern</h3>
-                <div class="date">Summer 2021 - Winter 2021</div>
-                <p>Analyzed TikTok advertisements to inform content strategy and media buying. Managed 5-6 figure monthly advertising spend for notable brands while automating performance dashboards.</p>
-            </div>
-            <div class="experience-item">
-                <div class="company">Meta</div>
-                <h3>Data Challenge Finalist</h3>
-                <div class="date">Summer 2021</div>
-                <p>Selected for four-month training program with Facebook data scientists. Completed weekly SQL classes and final project making recommendations based on streaming data.</p>
-            </div>
-        </section>
-
-        <section class="section" id="projects">
-            <h2>Notable Projects</h2>
-            <div class="project-item">
-                <h3>NYC Subway Challenge</h3>
-                <div class="date">Summer 2020 - Spring 2023</div>
-                <p>Founded cross-university project to find fastest route through all 472 NYC subway stations. Built C++ backend using BFS & A* algorithms with Python data scraping from MTA and Google Maps APIs.</p>
-            </div>
-            <div class="project-item">
-                <h3>Have I Been Gerrymandered?</h3>
-                <div class="date">Fall 2022</div>
-                <p>Created interactive map quantifying gerrymandering in congressional districts. Developed novel algorithm that successfully identified Alabama districts later ruled unconstitutional, validating the approach.</p>
-            </div>
-            <div class="project-item">
-                <h3>Willow Logic System</h3>
-                <div class="date">Spring 2023</div>
-                <p>Full-stack TypeScript development expanding truth tree application to support Davis-Putnam logic problems. Used as educational tool in university mathematical logic courses.</p>
-            </div>
-        </section>
-
-        <section class="section" id="skills">
-            <h2>Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h4>Programming Languages</h4>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">TypeScript</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">C</span>
-                        <span class="skill-tag">Kotlin</span>
+        <!-- Landing Page -->
+        <div id="landing" class="page active">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Mason duBoef</h1>
+                    <div class="hero-image">
+                        <div>
+                            Your Photo<br>
+                            Goes Here<br>
+                            <small>(300x300px)</small>
+                        </div>
+                    </div>
+                    <p class="subtitle">Computer Science Graduate Student & AI Researcher</p>
+                    <p class="tagline">
+                        Passionate about building intelligent systems that solve real-world problems. 
+                        Currently pursuing my Master's at UMass Amherst while developing cutting-edge 
+                        AI applications in sports analytics and beyond.
+                    </p>
+                    <div class="cta-buttons">
+                        <a class="btn btn-primary" onclick="showPage('projects')">View My Work</a>
+                        <a href="mailto:mduboef@gmail.com" class="btn btn-secondary">Get In Touch</a>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h4>AI & Data Science</h4>
-                    <div class="skill-tags">
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">Neural Networks</span>
-                        <span class="skill-tag">Computer Vision</span>
-                        <span class="skill-tag">Reinforcement Learning</span>
-                        <span class="skill-tag">Statistical Analysis</span>
+            </section>
+
+            <section class="about-section">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <p>
+                        <strong>Professional:</strong> I'm currently pursuing my Master's in Computer Science at UMass Amherst, 
+                        building on my foundation from RPI where I specialized in AI and data science. My research focuses on 
+                        applying machine learning to complex real-world problems, particularly in sports analytics where I'm 
+                        developing the first automated boxing judging system.
+                    </p>
+                    <br>
+                    <p>
+                        My experience spans from working with Meta as a Data Challenge Finalist to managing six-figure 
+                        advertising budgets at Mammoth Media. I've led cross-university open source projects and developed 
+                        algorithms that have been validated by real-world outcomes, like identifying gerrymandered districts 
+                        later ruled unconstitutional.
+                    </p>
+                    <br>
+                    <p>
+                        <strong>Personal:</strong> When I'm not coding or researching, you'll find me exploring the intersection 
+                        of technology and sports, working on open source projects, or diving deep into the latest developments 
+                        in AI and machine learning. I believe in building technology that makes a meaningful impact, whether 
+                        that's improving accessibility on campus or revolutionizing how we understand sports analytics.
+                    </p>
+                    <br>
+                    <p>
+                        I'm always excited to collaborate on interesting projects and discuss how AI can solve complex problems. 
+                        Feel free to reach out if you'd like to connect!
+                    </p>
+                </div>
+            </section>
+
+            <section class="contact-section">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="contact-grid">
+                    <a href="mailto:mduboef@gmail.com" class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <div>
+                            <strong>Personal Email</strong><br>
+                            mduboef@gmail.com
+                        </div>
+                    </a>
+                    <a href="mailto:mduboef@gmail.com" class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <div>
+                            <strong>University Email</strong><br>
+                            mduboef@gmail.com
+                        </div>
+                    </a>
+                    <a href="tel:702-513-4993" class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <div>
+                            <strong>Phone</strong><br>
+                            +1 702 513 4993
+                        </div>
+                    </a>
+                    <a href="#" class="contact-item">
+                        <span class="contact-icon">🐙</span>
+                        <div>
+                            <strong>GitHub</strong><br>
+                            View my code
+                        </div>
+                    </a>
+                    <a href="#" class="contact-item">
+                        <span class="contact-icon">💼</span>
+                        <div>
+                            <strong>LinkedIn</strong><br>
+                            Connect with me
+                        </div>
+                    </a>
+                    <a href="#" class="contact-item">
+                        <span class="contact-icon">🐙</span>
+                        <div>
+                            <strong>Instagram</strong><br>
+                            More social media
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- Projects Page -->
+        <div id="projects" class="page">
+            <div class="portfolio-header">
+                <h1 class="section-title">My Favorite Projects</h1>
+                <p style="font-size: 1.2rem; color: #666; margin-top: 20px;">
+                    A selection of personal coding projects that showcase my passion for solving complex problems 
+                    through innovative technology and algorithms.
+                </p>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="project-card">
+                    <h3 class="project-title">Automated Boxing Judging System</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">Computer Vision</span>
+                        <span class="tech-tag">Neural Networks</span>
+                    </div>
+                    <p class="project-description">
+                        Developed the first-ever automated judging system for professional boxing using computer vision 
+                        and neural networks. Scraped HD footage and scorecards from thousands of matches, using gradient 
+                        descent to map statistical outputs onto judges' scores. The system is currently under review for 
+                        official use by professional boxing commissions and represents a breakthrough in sports analytics.
+                    </p>
+                    <div class="project-figure">
+                        [Add screenshot/diagram of the boxing analysis system]
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">View Code</a>
+                        <a href="#" class="project-link">Research Paper</a>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h4>Web & Frameworks</h4>
-                    <div class="skill-tags">
-                        <span class="skill-tag">React.js</span>
-                        <span class="skill-tag">Django</span>
-                        <span class="skill-tag">REST APIs</span>
-                        <span class="skill-tag">SQL</span>
+
+                <div class="project-card">
+                    <h3 class="project-title">NYC Subway Challenge</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Algorithms</span>
+                        <span class="tech-tag">Graph Theory</span>
+                    </div>
+                    <p class="project-description">
+                        Founded a cross-university open source project to find the fastest route through all 472 NYC 
+                        subway stations with the goal of setting a world record. Built a C++ backend using BFS & A* 
+                        algorithms on an adjacency matrix representation of the subway system, with Python scripts for 
+                        data scraping from MTA and Google Maps APIs.
+                    </p>
+                    <div class="project-figure">
+                        [Add subway route visualization/map]
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">GitHub Repository</a>
+                        <a href="#" class="project-link">Route Visualization</a>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h4>Tools & Technologies</h4>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Jupyter</span>
-                        <span class="skill-tag">NumPy</span>
-                        <span class="skill-tag">Matplotlib</span>
-                        <span class="skill-tag">LaTeX</span>
+
+                <div class="project-card">
+                    <h3 class="project-title">Have I Been Gerrymandered?</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Data Analysis</span>
+                        <span class="tech-tag">Algorithms</span>
+                        <span class="tech-tag">Political Science</span>
+                    </div>
+                    <p class="project-description">
+                        Created an interactive online map that quantifies how gerrymandered individual congressional 
+                        districts are. Developed a novel algorithm using electoral data that successfully identified 
+                        Alabama districts later ruled unconstitutional by courts, validating the algorithm's effectiveness. 
+                        The project combines political science with computer science to make gerrymandering analysis accessible.
+                    </p>
+                    <div class="project-figure">
+                        [Add screenshot of the interactive map]
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Live Demo</a>
+                        <a href="#" class="project-link">Algorithm Details</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Automatic Door Control System</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Arduino</span>
+                        <span class="tech-tag">Kotlin</span>
+                        <span class="tech-tag">Bluetooth</span>
+                        <span class="tech-tag">Android</span>
+                    </div>
+                    <p class="project-description">
+                        Built a custom circuit with Arduino that connects a mobile app to existing door opener systems 
+                        via Bluetooth, enabling disabled students at RPI to open campus doors remotely. Developed the 
+                        Android application in Kotlin with an intuitive interface. This accessibility-focused project 
+                        demonstrates how simple technology can have a meaningful impact on people's daily lives.
+                    </p>
+                    <div class="project-figure">
+                        [Add photo of the hardware setup and app interface]
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">App Demo</a>
+                        <a href="#" class="project-link">Circuit Diagram</a>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
 
     <script>
-        // smooth scrolling navigation
-        const navItems = document.querySelectorAll('.nav-item');
-        const sections = document.querySelectorAll('.section, .header');
-
-        function updateActiveNav() {
-            let currentSection = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                
-                if (window.scrollY >= sectionTop - 200) {
-                    currentSection = section.getAttribute('id');
-                }
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
             });
 
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('data-section') === currentSection) {
-                    item.classList.add('active');
-                }
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Update nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
             });
+
+            // Add active class to clicked nav item
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // nav click handlers
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const sectionId = item.getAttribute('data-section');
-                const targetSection = document.getElementById(sectionId);
-                
-                if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // update active nav on scroll
-        window.addEventListener('scroll', updateActiveNav);
-        
-        // animate elements on scroll
+        // Animate elements on scroll
         function animateOnScroll() {
-            const elements = document.querySelectorAll('.education-item, .experience-item, .project-item');
+            const elements = document.querySelectorAll('.project-card, .about-section, .contact-section');
             
             elements.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
@@ -410,16 +633,19 @@
             });
         }
 
-        // initial setup for animations
+        // Initial setup for animations
         document.addEventListener('DOMContentLoaded', () => {
-            const elements = document.querySelectorAll('.education-item, .experience-item, .project-item');
+            const elements = document.querySelectorAll('.project-card, .about-section, .contact-section');
             elements.forEach(element => {
                 element.style.opacity = '0';
                 element.style.transform = 'translateY(30px)';
                 element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             });
             
-            animateOnScroll();
+            // Show first elements immediately
+            setTimeout(() => {
+                animateOnScroll();
+            }, 100);
         });
 
         window.addEventListener('scroll', animateOnScroll);
