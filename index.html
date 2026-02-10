@@ -217,6 +217,16 @@
             border-radius: 2px;
         }
 
+        .section-title.squiggly::after {
+            display: none;
+        }
+
+        .section-title.squiggly {
+            text-decoration: underline wavy #ffac25;
+            text-underline-offset: 8px;
+            text-decoration-thickness: 2px;
+        }
+
         .about-content {
             font-size: 1.0rem;
             line-height: 1.7;
@@ -378,7 +388,7 @@
 
         /* Fun Stuff Page Styles */
         #funstuff {
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -432,6 +442,84 @@
             font-style: italic;
             font-size: 0.8rem;
             border: 2px dashed #ffac25;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-grid img:hover {
+            transform: scale(1.03);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 80%;
+            max-height: 90%;
+            border-radius: 10px;
+            object-fit: contain;
+            cursor: default;
+        }
+
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 20px;
+            z-index: 2001;
+        }
+
+        .lightbox-arrow span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-top: 2.5px solid rgba(255, 255, 255, 0.8);
+            border-right: 2.5px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .lightbox-arrow:hover span {
+            border-color: white;
+        }
+
+        .lightbox-arrow.prev {
+            left: 20px;
+        }
+
+        .lightbox-arrow.prev span {
+            transform: rotate(-135deg);
+        }
+
+        .lightbox-arrow.next {
+            right: 20px;
+        }
+
+        .lightbox-arrow.next span {
+            transform: rotate(45deg);
         }
 
         .burrito-list {
@@ -606,8 +694,9 @@
                         <!-- Passionate about building clever systems that can solve real-world problems. -->
                     </p>
                     <div class="cta-buttons">
-                        <a class="btn btn-primary" onclick="showPage('projects')">View My Work</a>
-                        <a href="mailto:mduboef@gmail.com" class="btn btn-secondary">Get In Touch</a>
+                        <a class="btn btn-primary" onclick="showPage('projects')">View Projects</a>
+                        <a href="resume.pdf" target="_blank" class="btn btn-primary">View Resume</a>
+                        <!-- <a href="mailto:mduboef@gmail.com" class="btn btn-secondary">Get In Touch</a> -->
                     </div>
                 </div>
             </section>
@@ -626,7 +715,7 @@
                     </p>
                     <br>
                     <p>
-                        <u>I am currently seeking a Ph.D. position starting in spring 2027.</u>
+                        I am currently <u>seeking a Ph.D. position</u> starting in spring 2027.
                     </p>
                     <br>
                     <p>
@@ -738,7 +827,7 @@
                     <p class="project-description">
                         Attempting the find the fastest possible route through all 472 NYC subway stations. In essence, this is a minimum spanning walk problem with a relatively sparse graph of 472 nodes.<br><br>
                         This is a long-time project that has grown with me through my undergraduate and graduate career, serving as a great excuse to implement new algorithms and approaches I encounter. I started pursuing this in 2019 at RPI. I led a team of 12 student contributors over 3 semesters at the <a href="https://new.rcos.io/" target="_blank">Rensselaer Center for Open Source (RCOS)</a>. We built a model of the subway and experimented with different classical algorithmic approaches (no learning).<br><br>
-                        At UMass I have reformulated the project, taking an RL-based approach. I use a betweenness clustering to break the subway system into a hierarchical MDP. I apply value iteration to find a near-optimal policy for traversing the subway system.<br><br>Shout out to my buddy <a href="https://www.linkedin.com/in/sivaraaman-balakrishnan/" target="_blank">Siva</a> for these dope visualizations!
+                        At UMass I have reformulated the project, taking an RL-based approach. I use a betweenness clustering to break the subway system into a hierarchical MDP. I apply value iteration to find a near-optimal policy for traversing the subway system.<br><br>Shout out to my buddy <a href="https://www.linkedin.com/in/sivaraaman-balakrishnan/" target="_blank">Siva</a> for these visualizations!
                     <div class="project-figure medium">
                         <img src="originalSubway.png" alt="Original subway map">
                         <img src="clusteredSubway.png" alt="Clustered subway map">
@@ -839,9 +928,6 @@
                         A really cool accessibility project I was able to contribute to under the supervision of <a href="https://sites.google.com/view/mallorygaspard/home" target="_blank">Mallory Gaspard</a> at the <a href="https://new.rcos.io/" target="_blank">Rensselaer Center for Open Source (RCOS)</a>. An embedded device allows disabled students to open doors remotely via a mobile app.<br><br>
                         I built a custom circuit with in-built Arduino. It connects a mobile app to existing door opener systems via Bluetooth, enabling disabled students to open campus doors remotely. I also developed part of the Android application in Kotlin.
                     </p>
-                    <div class="project-figure small">
-                        <img src="adcCircuit.png" alt="Automatic door control circuit">
-                    </div>
                     <div class="project-links">
                         <a href="https://github.com/AutomaticDoorControl/AutoDoorCtrlArduino" target="_blank" class="project-link">GitHub Repo</a>
                     </div>
@@ -868,7 +954,7 @@
         <!-- Fun Stuff Page -->
         <div id="funstuff" class="page">
             <div class="portfolio-header">
-                <h1 class="section-title">Fun Stuff!</h1>
+                <h1 class="section-title squiggly">Fun Stuff!</h1>
                 <p style="font-size: 1.0rem; color: #666; margin-top: 20px;">
                     A collection of miscellaneous stuff I've put together that needs a home on the internet.
                     <!-- I resent having missed out on the early 2000s blogging boom and miss personal websites with flash games and such. -->
@@ -982,23 +1068,26 @@
                     </li>
                 </ul>
             </section>
-<!-- 
+
             <section class="fun-section">
                 <h2 class="section-title">Photography</h2>
                 <p style="color: #555; font-size: 1.1rem;">
                     I have a camera and take photos sometimes!
                 </p>
                 <div class="photo-grid">
-                    <div class="photo-placeholder">[Add photo]</div>
-                    <div class="photo-placeholder">[Add photo]</div>
-                    <div class="photo-placeholder">[Add photo]</div>
-                    <div class="photo-placeholder">[Add photo]</div>
-                    <div class="photo-placeholder">[Add photo]</div>
-                    <div class="photo-placeholder">[Add photo]</div>
+                    <img src="photoSpain.jpeg" alt="Spain" onclick="openLightbox(this)">
+                    <img src="photoSnowy.jpeg" alt="Snowy" onclick="openLightbox(this)">
+                    <img src="photoQuinn.jpeg" alt="Quinn" onclick="openLightbox(this)">
+                    <img src="photoLandscape.jpeg" alt="Landscape" onclick="openLightbox(this)">
+                    <img src="photoGazebo.jpeg" alt="Gazebo" onclick="openLightbox(this)">
+                    <img src="photoColt.jpeg" alt="Colt" onclick="openLightbox(this)">
+                    <img src="photoClareWell.jpeg" alt="Clare Well" onclick="openLightbox(this)">
+                    <img src="photoCity.jpeg" alt="City" onclick="openLightbox(this)">
+                    <img src="photoBarcSquare.jpeg" alt="Barcelona Square" onclick="openLightbox(this)">
                 </div>
             </section>
 
-            <section class="fun-section">
+            <!-- <section class="fun-section">
                 <h2 class="section-title">Beginner's Guide to Safe and Effective Tackling in Quadball</h2>
                 <p style="color: #555; font-size: 1.1rem;">
                     Potentially coming soon!
@@ -1008,7 +1097,44 @@
     </div>
     </div>
 
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-arrow prev" onclick="event.stopPropagation(); cycleLightbox(-1)"><span></span></button>
+        <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+        <button class="lightbox-arrow next" onclick="event.stopPropagation(); cycleLightbox(1)"><span></span></button>
+    </div>
+
     <script>
+        // lightbox for photography
+        let lightboxPhotos = [];
+        let lightboxIndex = 0;
+
+        function openLightbox(img) {
+            lightboxPhotos = Array.from(document.querySelectorAll('.photo-grid img'));
+            lightboxIndex = lightboxPhotos.indexOf(img);
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function cycleLightbox(direction) {
+            lightboxIndex = (lightboxIndex + direction + lightboxPhotos.length) % lightboxPhotos.length;
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = lightboxPhotos[lightboxIndex].src;
+            lightboxImg.alt = lightboxPhotos[lightboxIndex].alt;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') cycleLightbox(-1);
+            if (e.key === 'ArrowRight') cycleLightbox(1);
+        });
+
         function showPage(pageId) {
             // Hide all pages
             const pages = document.querySelectorAll('.page');
