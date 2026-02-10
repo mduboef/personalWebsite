@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mason duBoef</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #ffac25 0%, #ff6f00 100%);
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .scroll-wrapper {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .navbar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+        }
+
+        .nav-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #ffac25;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 20px 20px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .scroll-indicator {
+            text-align: center;
+            padding: 8px 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .scroll-chevron {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-right: 2.5px solid rgba(255, 255, 255, 0.9);
+            border-bottom: 2.5px solid rgba(255, 255, 255, 0.9);
+            transform: rotate(45deg);
+        }
+
+        /* Landing Page Styles */
+        .hero {
+            text-align: center;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(10px);
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-content h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffac25, #ff6f00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.05rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .hero-content .subtitle a {
+            color: #ffac25;
+        }
+
+        .hero-content .tagline {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 0.85rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ffac25, #ff6f00);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 172, 37, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffac25;
+            border: 2px solid #ffac25;
+        }
+
+        .btn-secondary:hover {
+            background: #ffac25;
+            color: white;
+        }
+
+        .hero-image {
+            width: 220px;
+            height: 220px;
+            border-radius: 14px;
+            background-image: url('square.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+            margin: 0 auto 15px;
+        }
+
+        .about-section,
+        .contact-section {
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(10px);
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 18px;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 18px;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #ffac25, #ff6f00);
+            border-radius: 2px;
+        }
+
+        .about-content {
+            font-size: 1.0rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .about-content a,
+        .project-description a,
+        .fun-section a {
+            color: #ff8c00;
+            text-decoration: underline;
+        }
+
+        .about-content a:hover,
+        .project-description a:hover,
+        .fun-section a:hover {
+            color: #ffac25;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            border-left: 3px solid #ffac25;
+            font-size: 0.85rem;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            width: 25px;
+            height: 25px;
+            flex-shrink: 0;
+        }
+
+        /* Portfolio Page Styles */
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(10px);
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(10px);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .tech-tag {
+            background: transparent;
+            color: #ffac25;
+            border: 2px solid #ffac25;
+            padding: 3px 9px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .project-description {
+            color: #555;
+            line-height: 1.65;
+            margin-bottom: 15px;
+            font-size: 0.88rem;
+        }
+
+        .project-figure {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .project-figure img {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .project-figure.small img {
+            width: 40%;
+            margin: 0 auto;
+        }
+
+        .project-figure.medium img {
+            width: 75%;
+            margin: 0 auto;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+
+        .project-link {
+            padding: 7px 14px;
+            background: linear-gradient(135deg, #ffac25, #ff6f00);
+            color: white;
+            text-decoration: none;
+            border-radius: 18px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 172, 37, 0.3);
+        }
+
+        /* Fun Stuff Page Styles */
+        #funstuff {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .fun-section {
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(10px);
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .fun-section .section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .fun-section.centered {
+            text-align: center;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .photo-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 18px 0;
+        }
+
+        .about-photo {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .photo-placeholder {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, rgba(255, 172, 37, 0.1), rgba(255, 111, 0, 0.1));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-style: italic;
+            font-size: 0.8rem;
+            border: 2px dashed #ffac25;
+        }
+
+        .burrito-list {
+            list-style: none;
+            margin-top: 18px;
+        }
+
+        .burrito-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 14px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 3px solid #ffac25;
+            transition: all 0.3s ease;
+        }
+
+        .burrito-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        .burrito-rank {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffac25, #ff6f00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            min-width: 40px;
+        }
+
+        .burrito-info h4 {
+            font-size: 0.98rem;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .burrito-info p {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .misc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .misc-card {
+            padding: 18px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+            border-left: 3px solid #ffac25;
+            transition: all 0.3s ease;
+        }
+
+        .misc-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        .misc-card h4 {
+            font-size: 0.95rem;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .misc-card p {
+            color: #666;
+            line-height: 1.55;
+            font-size: 0.85rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-image {
+                width: 130px;
+                height: 130px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .photo-grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .container {
+                padding: 15px 12px 15px;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .fun-section {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .navbar {
+                padding: 12px 0;
+            }
+
+            .container {
+                padding: 15px 12px 15px;
+            }
+        }
+
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-links">
+                <a class="nav-link active" onclick="showPage('landing')">About Me</a>
+                <a class="nav-link" onclick="showPage('projects')">Projects</a>
+                <a class="nav-link" onclick="showPage('funstuff')">Fun Stuff!</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="scroll-wrapper">
+    <div class="container">
+        <!-- Landing Page -->
+        <div id="landing" class="page active">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Mason duBoef</h1>
+                    <div class="hero-image"></div>
+                    <p class="subtitle">Master's Student at UMass Amherst<br>Research Intern at Jabbr</p>
+                    <p class="tagline">
+                        <!-- Passionate about building clever systems that can solve real-world problems. -->
+                    </p>
+                    <div class="cta-buttons">
+                        <a class="btn btn-primary" onclick="showPage('projects')">View My Work</a>
+                        <a href="mailto:mduboef@gmail.com" class="btn btn-secondary">Get In Touch</a>
+                    </div>
+                </div>
+            </section>
+
+            <div class="scroll-indicator">
+                <span class="scroll-chevron"></span>
+            </div>
+
+            <section class="about-section">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <p>
+                        I am interested in reinforcement learning (RL), particularly multi-objective reinforcement learning, alignment, and complex real-world decision-making systems.<br><br>
+                        
+                        I'm currently pursuing my Master's in Computer Science at the University of Massachusetts Amherst. I do research at the SCALAR lab under <a href="https://people.cs.umass.edu/~sniekum/" target="_blank">Scott Niekum</a>. I have also done research at the Fair and Explainable Decision Making (FED) lab under <a href="https://people.cs.umass.edu/~yzick/" target="_blank">Yair Zick</a>. I received my Bachelor's in Computer Science from Rensselaer Polytechnic Institute (RPI). At RPI I worked under <a href="https://people.cs.rutgers.edu/~lirong.xia/" target="_blank">Lirong Xia</a>.
+                    </p>
+                    <br>
+                    <p>
+                        <u>I am currently seeking a Ph.D. position starting in spring 2027.</u>
+                    </p>
+                    <br>
+                    <p>
+                        I also work as a research intern at <a href="https://www.jabbr.ai/" target="_blank">Jabbr</a>, a startup building intelligent camera systems for combat sports. I mostly work on modeling and analyzing judging in boxing. Jabbr's office is based in Shenzhen, China. Last summer I was able to visit a couple times, work in-person, and run a marathon on the Great Wall of China with my fellow Jabbr-ites!
+                    </p>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <div class="about-content">
+                    <p>
+                        I am originally from Aspen, Colorado. I enjoy a wide range of sports, including skiing, mountain biking, climbing, and running. I currently compete on UMass's <a href="https://www.instagram.com/umassrugby/?hl=en" target="_blank">men's rugby</a> and <a href="https://www.instagram.com/umassfencing/" target="_blank">club fencing</a> team. I also play quadball for <a href="https://www.instagram.com/vtuquadball/?hl=en" target="_blank">Vermont United</a> and the <a href="https://www.mlquadball.com/boston" target="_blank">Boston Forge</a>.<br><br>
+                        I have a deep love for kung fu movies and rom-coms, especially the early 2000s ones with floppy-haired Hugh Grant. I like live music, especially punk and electronic. I support Liverpool FC. I have an ocassional weakness for MMORPGs (WoW and FFXIV). My girlfriend and I have a cat named Goose who likes to stand on people's necks when they're sleeping.
+                    </p>
+                    <div class="photo-grid-4">
+                        <img class="about-photo" src="clareMasonHutTrip.jpeg" alt="Hut trip">
+                        <img class="about-photo" src="spainWet.jpeg" alt="Spain">
+                        <img class="about-photo" src="marathon.jpeg" alt="Marathon">
+                        <img class="about-photo" src="goose.jpeg" alt="Goose">
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <h2 class="section-title">Publications</h2>
+                <div class="about-content">
+                    <p>
+                        <strong>M. duBoef</strong>, T. Romeas, M. Charbonneau, A. S. Nielsen, "Interpretable Prediction and Large-Scale Analysis of Judging in Professional Boxing" (to appear) in 2026 MIT Sloan Sports Analytics Conference.
+                    </p>
+                </div>
+            </section>
+
+            <section class="contact-section">
+                <h2 class="section-title">Contact</h2>
+                <div class="contact-grid">
+                    <a href="mailto:mduboef@gmail.com" class="contact-item">
+                        <img class="contact-icon" src="emailSVG.svg" alt="Email">
+                        <div>
+                            <strong>Personal Email</strong><br>
+                            mduboef@gmail.com
+                        </div>
+                    </a>
+                    <a href="mailto:mduboef@umass.edu" class="contact-item">
+                        <img class="contact-icon" src="emailSVG.svg" alt="Email">
+                        <div>
+                            <strong>University Email</strong><br>
+                            mduboef@umass.edu
+                        </div>
+                    </a>
+                    <a href="https://github.com/mduboef" target="_blank" class="contact-item">
+                        <img class="contact-icon" src="githubSVG.svg" alt="GitHub">
+                        <div>
+                            <strong>GitHub</strong><br>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mason-duboef-489150164/" target="_blank" class="contact-item">
+                        <img class="contact-icon" src="linkedinSVG.svg" alt="LinkedIn">
+                        <div>
+                            <strong>LinkedIn</strong><br>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- Projects Page -->
+        <div id="projects" class="page">
+            <div class="portfolio-header">
+                <h1 class="section-title">My Favorite Projects</h1>
+                <p style="font-size: 1.0rem; color: #666; margin-top: 20px;">
+                    A selection of personal coding projects. Some polished, some less polished, but all fun and interesting to me!
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="project-card">
+                    <h3 class="project-title">AI Boxing Judge</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Machine Learning</span>
+                        <span class="tech-tag">Neural Networks</span>
+                        <span class="tech-tag">Optimization</span>
+                        <span class="tech-tag">Interpretability</span>
+                    </div>
+                    <p class="project-description">
+                        Developed autonomous points-based scoring system for boxing. Scores rounds with accuracy within the range of professional judges. Provides a consistent, transparent, bias-free and scalable scoring standard to a sport with highly subjective scoring criteria and a long history of scoring controversy.<br><br>
+
+                        Gradient descent & neural network used to map stats output by <a href="https://jabbr.ai/deepstrike" target="_blank">computer vision system</a> onto judges’ scores. Feature selection, correlation analysis and analysis of learned weights used to identify what performance factors matter to judges. Evaluation of top judges and quantification of their stylistic differences.<br><br>
+
+                        Finalist for 2026 MIT Sloan Sports Analytics Conference Research Paper Competition.<br><br>
+                    </p>
+                    <div class="project-figure">
+                        <img src="aiJudge.png" alt="AI Judge">
+                    </div>
+                    <div class="project-links">
+                        <a href="duBoefSSACPaper.pdf" target="_blank" class="project-link">Conference Paper</a>
+                        <a href="duBoefSSACSlides.pdf" target="_blank" class="project-link">Conference Slides</a>
+                        <a href="duBoefSSACPoster.pdf" target="_blank" class="project-link">Conference Poster</a>
+                        <a href="https://github.com/mduboef/Jabbr-AI-Boxing-Judging" target="_blank" class="project-link">GitHub Repo</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">NYC Subway Challenge</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Path Finding</span>
+                        <span class="tech-tag">Reinforcement Learning</span>
+                        <span class="tech-tag">Clustering</span>
+                        <span class="tech-tag">Webscraping</span>
+                    </div>
+                    <p class="project-description">
+                        Attempting the find the fastest possible route through all 472 NYC subway stations. In essence, this is a minimum spanning walk problem with a relatively sparse graph of 472 nodes.<br><br>
+                        This is a long-time project that has grown with me through my undergraduate and graduate career, serving as a great excuse to implement new algorithms and approaches I encounter. I started pursuing this in 2019 at RPI. I led a team of 12 student contributors over 3 semesters at the <a href="https://new.rcos.io/" target="_blank">Rensselaer Center for Open Source (RCOS)</a>. We built a model of the subway and experimented with different classical algorithmic approaches (no learning).<br><br>
+                        At UMass I have reformulated the project, taking an RL-based approach. I use a betweenness clustering to break the subway system into a hierarchical MDP. I apply value iteration to find a near-optimal policy for traversing the subway system.<br><br>Shout out to my buddy <a href="https://www.linkedin.com/in/sivaraaman-balakrishnan/" target="_blank">Siva</a> for these dope visualizations!
+                    <div class="project-figure medium">
+                        <img src="originalSubway.png" alt="Original subway map">
+                        <img src="clusteredSubway.png" alt="Clustered subway map">
+                    </div>
+                    <div class="project-links">
+                        <a href="subwayRLChallenge.pdf" target="_blank" class="project-link">Write-up</a>
+                        <a href="https://github.com/mduboef/subwayChallengeRL" target="_blank" class="project-link">GitHub Repo</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Have I Been Gerrymandered?</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Statistics</span>
+                        <span class="tech-tag">Visualization</span>
+                    </div>
+                    <p class="project-description">
+                        Gerrymandering is a thing, right.<br>Well, ever wondered how gerrymandered your district is?<br><br>
+                        
+                        I created an interactive online map that indicates how gerrymandered an individual congressional
+                        district is. To do this I developed a novel extension to efficiency gap, a measure of district fairness given electoral data. This approach successfully identified 
+                        Alabama districts that were later ruled unconstitutional by courts. 
+                    </p>
+                    <div class="project-links">
+                        <a href="gerrymanderSlides.pdf" target="_blank" class="project-link">Slides</a>
+                        <a href="https://github.com/orgs/Have-I-Been-Gerrymandered/repositories" target="_blank" class="project-link">GitHub Repo</a>
+                    </div>
+                </div>
+
+
+                <div class="project-card">
+                    <h3 class="project-title">Algorithmic Fair Allocation for Food Rescue</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Computational Social Choice</span>
+                        <span class="tech-tag">Optimization</span>
+                        <span class="tech-tag">Simulation</span>
+                        <span class="tech-tag">Theory</span>
+
+                    </div>
+                    <p class="project-description">
+                        Pursued as part of the <a href="https://people.cs.umass.edu/~yzick/people.html" target="_blank">Fair and Explainable Decision Making (FED) lab</a> alongside <a href="https://cheerstopaula.github.io/site/home.html" target="_blank">Paula Navarrete Diaz</a>.<br><br>
+                        Automated dispatch solution for <a href="https://feedwma.org/" target="_blank">Rachel’s Table</a>, a food rescue delivering 50k meals per month in Western MA. Automated tool creates scheduled routes for Rachel's Table volunteer drivers, who pick up excess food from donors (ex. restaurants, grocery stores) and deliver it to receiving agencies (ex. food pantries).<br><br>
+                        Integer linear program, optimized routing to maximize fairness and efficiency, with food allocated to agencies based on their size, while also favoring a balanced distribution of food types and dealing with the stochastic nature of food availability.<br><br>
+                    </p>
+                    <div class="project-figure">
+                        <img src="rtAllocation.png" alt="Food rescue allocation">
+                    </div>
+                    <div class="project-links">
+                        <a href="rtWriteup.pdf" target="_blank" class="project-link">Write-up</a>
+                        <a href="rtSlides.pdf" target="_blank" class="project-link">Slides</a>
+                    </div>
+                </div>
+
+
+                <div class="project-card">
+                    <h3 class="project-title">Subway Tolling for Congestion Deterrence</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Computational Social Choice</span>
+                        <span class="tech-tag">Simulation</span>
+                        <span class="tech-tag">Webscraping</span>
+                    </div>
+                    <p class="project-description">
+                        Devised optimal toll pricing to deter congestion and promote efficiency on NYC’s 1 Line. Used Nash equilibrium analysis and traffic simulation based on real MTA data.
+                    </p>
+                    <div class="project-links">
+                        <a href="tollingPaper.pdf" target="_blank" class="project-link">Write-up</a>
+                        <a href="tollingSlides.pdf" target="_blank" class="project-link">Slides</a>
+                        <a href="https://github.com/mduboef/subwayTollSim" target="_blank" class="project-link">GitHub Repo</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3 class="project-title">Stable Matching In OPRA Voting Platform</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">Backend</span>
+                        <span class="tech-tag">Computational Social Choice</span>
+                    </div>
+                    <p class="project-description">
+                        OPRA is an online platform for preference reporting and aggregation. I extended OPRA's backend to support matching problems and apply different matching algorithms. This was done under Prof. Lirong Xia at RPI (now at Rutgers).
+                    </p>
+                    <div class="project-figure">
+                        <!-- [Add photo of the hardware setup and app interface] -->
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/mduboef/opraMatching" target="_blank" class="project-link">GitHub Repo</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3 class="project-title">Automatic Door Control</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Circuit Design</span>
+                        <span class="tech-tag">Arduino</span>
+                        <span class="tech-tag">Android</span>
+                        <span class="tech-tag">Kotlin</span>
+                    </div>
+                    <p class="project-description">
+                        A really cool accessibility project I was able to contribute to under the supervision of <a href="https://sites.google.com/view/mallorygaspard/home" target="_blank">Mallory Gaspard</a> at the <a href="https://new.rcos.io/" target="_blank">Rensselaer Center for Open Source (RCOS)</a>. An embedded device allows disabled students to open doors remotely via a mobile app.<br><br>
+                        I built a custom circuit with in-built Arduino. It connects a mobile app to existing door opener systems via Bluetooth, enabling disabled students to open campus doors remotely. I also developed part of the Android application in Kotlin.
+                    </p>
+                    <div class="project-figure small">
+                        <img src="adcCircuit.png" alt="Automatic door control circuit">
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/AutomaticDoorControl/AutoDoorCtrlArduino" target="_blank" class="project-link">GitHub Repo</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3 class="project-title">Davis-Putnam In Willow</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Logic</span>
+                        <span class="tech-tag">Web Development</span>
+                    </div>
+                    <p class="project-description">
+                        Willow is a web app used to build and assign truth trees. It is largely used in an education context to teach formal logic.<br><br>
+                        I extended Willow, enabling support for Davis-Putnam type logic problems. This was done under Prof. Bram Van Heuveln at RPI.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://willow.bram-hub.com/" target="_blank" class="project-link">Website</a>
+                        <a href="https://github.com/Bram-Hub/Willow" target="_blank" class="project-link">GitHub Repo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fun Stuff Page -->
+        <div id="funstuff" class="page">
+            <div class="portfolio-header">
+                <h1 class="section-title">Fun Stuff!</h1>
+                <p style="font-size: 1.0rem; color: #666; margin-top: 20px;">
+                    A collection of miscellaneous stuff I've put together that needs a home on the internet.
+                    <!-- I resent having missed out on the early 2000s blogging boom and miss personal websites with flash games and such. -->
+                </p>
+            </div>
+
+            <section class="fun-section">
+                <h2 class="section-title">Ranking of Breakfast Burritos in Aspen</h2>
+                <p style="color: #555; font-size: 1.1rem;">
+                    Fair warning: Restaurants open and close like every six months in Aspen. Nonetheless, I will attempt to add places in accordance with the shifting sands of the Aspen culinary landscape.
+                </p>
+                <br>
+                <p style="color: #555; font-size: 1.1rem;">
+                    Also, when presented with different options for fillings I go with chorizo.
+                </p>
+                <br>
+                <p style="color: #555; font-size: 1.1rem;">
+                    Yet to be ranked: Hometeam, Mama's, Daily Diner, The Tavern, and Fuel
+                </p>
+                <ul class="burrito-list">
+                    <li class="burrito-item">
+                        <span class="burrito-rank">#1</span>
+                        <div class="burrito-info">
+                            <h4>Louis Swiss</h4>
+                            <p>The north star. The standard to which all others are compared. Uncomplicated. The platonic ideal of a breakfast burrito.</p>
+                        </div>
+                    </li>
+                    <li class="burrito-item">
+                        <span class="burrito-rank">#2</span>
+                        <div class="burrito-info">
+                            <h4>Mollie's</h4>
+                            <p>Very fancy and high class. This bitch had short rib and came with this mysterious green sauce. Frickin bomb.</p>
+                        </div>
+                    </li>
+                    <li class="burrito-item">
+                        <span class="burrito-rank">#3</span>
+                        <div class="burrito-info">
+                            <h4>520 / Silverpeak Grill</h4>
+                            <p>Large. Lots of chorizo. Really greasy. Great bang for your buck. <a href="https://c.org/RfVXhnYqQW" target="_blank">Sign this</a> to help out Troy, the owner, and keep 520 in town.</p>
+                        </div>
+                    </li>
+                    <li class="burrito-item">
+                        <span class="burrito-rank">#4</span>
+                        <div class="burrito-info">
+                            <h4>Grub / Shell Gas</h4>
+                            <p>Most affordable on the list. The chorizo ones are great (the others not so much). They've got whole peppers in them. You have to get to Shell before 9am or they will be sold out.</p>
+                        </div>
+                    </li>
+                    <li class="burrito-item">
+                        <span class="burrito-rank">#5</span>
+                        <div class="burrito-info">
+                            <h4>Spring Cafe</h4>
+                            <p>Good in spite of being vegetarian. They have some fake cheese thing going on that's super good. The side salsa is solid. I crave these often. Good cold/leftover.</p>
+                        </div>
+                    </li>
+                    <li class="burrito-item">
+                        <span class="burrito-rank">#6</span>
+                        <div class="burrito-info">
+                            <h4>Big Wrap</h4>
+                            <p>Generally solid and affordable. Good meat, the bacon gives a good crunch. I wish they used a different salsa/pico.</p>
+                        </div>
+                    </li>
+                    <li class="burrito-item">
+                        <span class="burrito-rank">#7</span>
+                        <div class="burrito-info">
+                            <h4>Bear Den</h4>
+                            <p></p>
+                        </div>
+                    </li>
+                    <li class="burrito-item">
+                        <span class="burrito-rank">#8</span>
+                        <div class="burrito-info">
+                            <h4>Paradise Bakery</h4>
+                            <p>Did you know paradise has breakfast burritos? They are pretty solid and reliable. Shout out to Donovan and Alex for bringing this one to light.</p>
+                        </div>
+                    </li>
+                    <li class="burrito-item">
+                        <span class="burrito-rank">#9</span>
+                        <div class="burrito-info">
+                            <h4>Hickory House</h4>
+                            <p>Good salsa. Very egg heavy. I want more meat and cheese.</p>
+                        </div>
+                    </li>
+                    <li class="burrito-item">
+                        <span class="burrito-rank">#10</span>
+                        <div class="burrito-info">
+                            <h4>Silver's</h4>
+                            <p></p>
+                        </div>
+                    </li>
+                    <li class="burrito-item">
+                        <span class="burrito-rank">#11</span>
+                        <div class="burrito-info">
+                            <h4>Jour de fete</h4>
+                            <p>RIP Jour de fete. I miss you.</p>
+                        </div>
+                    </li>
+                    <li class="burrito-item">
+                        <span class="burrito-rank">#12</span>
+                        <div class="burrito-info">
+                            <h4>Jüs</h4>
+                            <p>More of a weird heath-conscious breakfast "wrap" than a burrito.</p>
+                        </div>
+                    </li>
+                    <li class="burrito-item">
+                        <span class="burrito-rank">#13</span>
+                        <div class="burrito-info">
+                            <h4>Poppycocks</h4>
+                            <p>I like Poppycocks a lot. This was a let down. Salsa all over it so you can't pick it up. You have to use a fork and knife. I'm willing to accept that (ex. Hickory House) if the sauce and burrito fundamentals are bangin. This one was not. Get the oatmeal pancakes.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+<!-- 
+            <section class="fun-section">
+                <h2 class="section-title">Photography</h2>
+                <p style="color: #555; font-size: 1.1rem;">
+                    I have a camera and take photos sometimes!
+                </p>
+                <div class="photo-grid">
+                    <div class="photo-placeholder">[Add photo]</div>
+                    <div class="photo-placeholder">[Add photo]</div>
+                    <div class="photo-placeholder">[Add photo]</div>
+                    <div class="photo-placeholder">[Add photo]</div>
+                    <div class="photo-placeholder">[Add photo]</div>
+                    <div class="photo-placeholder">[Add photo]</div>
+                </div>
+            </section>
+
+            <section class="fun-section">
+                <h2 class="section-title">Beginner's Guide to Safe and Effective Tackling in Quadball</h2>
+                <p style="color: #555; font-size: 1.1rem;">
+                    Potentially coming soon!
+                </p>
+            </section> -->
+        </div>
+    </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Update nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Add active class to clicked nav item
+            event.target.classList.add('active');
+
+            // Scroll to top
+            document.querySelector('.scroll-wrapper').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.project-card, .about-section, .contact-section, .fun-section');
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+
+            // fade out scroll chevron when about-section appears
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            const aboutSection = document.querySelector('.about-section');
+            if (scrollIndicator && aboutSection) {
+                const aboutTop = aboutSection.getBoundingClientRect().top;
+                if (aboutTop < window.innerHeight - 100) {
+                    scrollIndicator.style.opacity = '0';
+                } else {
+                    scrollIndicator.style.opacity = '1';
+                }
+            }
+        }
+
+        // Initial setup for animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.project-card, .about-section, .contact-section, .fun-section');
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+            
+            // Show first elements immediately
+            setTimeout(() => {
+                animateOnScroll();
+            }, 100);
+        });
+
+        document.querySelector('.scroll-wrapper').addEventListener('scroll', animateOnScroll);
+
+        // particle effect
+        (function() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let mouse = { x: null, y: null };
+            const particleCount = 30;
+            const maxDistance = 120;
+            const edgeDistance = 150;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            function createParticle() {
+                return {
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 2.5,
+                    speedX: (Math.random() - 0.5) * 0.5,
+                    speedY: (Math.random() - 0.5) * 0.5,
+                    opacity: Math.random() * 0.3 + 0.5
+                };
+            }
+
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(createParticle());
+                }
+            }
+
+            function drawParticle(p) {
+                ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+                ctx.fillRect(p.x - p.size / 2, p.y - p.size / 2, p.size, p.size);
+            }
+
+            function updateParticle(p) {
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                // wrap around edges
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                // react to mouse
+                if (mouse.x !== null && mouse.y !== null) {
+                    const dx = mouse.x - p.x;
+                    const dy = mouse.y - p.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < maxDistance) {
+                        const force = (maxDistance - distance) / maxDistance;
+                        p.x -= dx * force * 0.02;
+                        p.y -= dy * force * 0.02;
+                    }
+                }
+            }
+
+            function drawEdges() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < edgeDistance) {
+                            const opacity = (1 - distance / edgeDistance) * 0.3;
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(p => {
+                    updateParticle(p);
+                    drawParticle(p);
+                });
+
+                drawEdges();
+
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+
+            window.addEventListener('mouseout', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            resizeCanvas();
+            initParticles();
+            animate();
+        })();
+    </script>
+</body>
+</html>
