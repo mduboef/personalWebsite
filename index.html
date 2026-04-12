@@ -266,6 +266,10 @@
             display: none;
         }
 
+        #projects h1.section-title::after {
+            display: none;
+        }
+
         .section-title.squiggly {
             text-decoration: underline wavy #ffac25;
             text-underline-offset: 8px;
@@ -308,7 +312,6 @@
             text-decoration: none;
             color: #333;
             transition: all 0.3s ease;
-            border-left: 3px solid #ffac25;
             font-size: 0.85rem;
         }
 
@@ -754,13 +757,14 @@
                 <h2 class="section-title">About Me</h2>
                 <div class="about-content">
                     <p>
-                        I am broadly interested in reinforcement learning, especially agents whose objective structures richly express diverse human preferences (e.g. MORL, IRL) but whose policies are learned through environment interaction, enabling performance unconstrained by human demonstration/feedback quality. I have been motivated by problem structures in games, transit, gerrymandering, and subjectively judged sports.<br><br>
+                        I am broadly interested in <strong>reinforcement learning</strong>, including work in alignment and partial observability.<br>
+                        Right now, I am focusing on agents whose objective structures can richly express diverse human preferences (e.g. MORL) but whose policies are learned through environment interaction.<br><br>
                         
                         I'm pursuing my Master's in Computer Science at the University of Massachusetts Amherst. I currently do research on preference-based learning under <a href="https://people.cs.umass.edu/~sniekum/" target="_blank">Scott Niekum</a>. I have also done research at the Fair and Explainable Decision Making (FED) lab under <a href="https://people.cs.umass.edu/~yzick/" target="_blank">Yair Zick</a>. I received my Bachelor's in Computer Science from Rensselaer Polytechnic Institute (RPI) where I worked under <a href="https://people.cs.rutgers.edu/~lirong.xia/" target="_blank">Lirong Xia</a>.
                     </p>
                     <br>
                     <p>
-                        I am currently <u>seeking a Ph.D. position</u> to start after my graduation in December 2026.
+                        I am currently <strong>seeking a Ph.D. position</strong> to start after my graduation in December 2026.
                     </p>
                     <br>
                     <p>
@@ -773,7 +777,7 @@
                 <div class="about-content">
                     <p>
                         I am originally from Aspen, Colorado. I enjoy a wide range of sports, including skiing, mountain biking, climbing, and running. I currently compete on UMass's <a href="https://www.instagram.com/umassrugby/?hl=en" target="_blank">men's rugby</a> and <a href="https://www.instagram.com/umassfencing/" target="_blank">club fencing</a> team. I also play quadball for <a href="https://www.instagram.com/vtuquadball/?hl=en" target="_blank">Vermont United</a> and the <a href="https://www.mlquadball.com/boston" target="_blank">Boston Forge</a>.<br><br>
-                        I have a deep love for kung fu movies and rom-coms, especially the early 2000s ones with floppy-haired Hugh Grant. I like live music, especially punk and electronic. I support Liverpool FC and have an ocassional weakness for MMORPGs (WoW and FFXIV). My girlfriend and I have a cat named Goose who likes to stand on people's necks when they're sleeping.
+                        I have a deep love for kung fu movies and rom-coms, especially the early 2000s ones with floppy-haired Hugh Grant. I enjoy live music, especially punk and electronic. I support Liverpool FC and have an ocassional weakness for MMORPGs (WoW and FFXIV). My girlfriend and I have a cat named Goose who likes to stand on people's necks when they're sleeping.
                     </p>
                     <div class="photo-grid-4">
                         <img class="about-photo" src="clareMasonHutTrip.jpeg" alt="Hut trip">
@@ -841,21 +845,20 @@
                         <span class="tech-tag">Machine Learning</span>
                         <span class="tech-tag">Neural Networks</span>
                         <span class="tech-tag">Optimization</span>
-                        <span class="tech-tag">Interpretability</span>
                     </div>
                     <p class="project-description">
                         Developed an autonomous points-based scoring system for boxing, optimized via gradient descent to reflect the decision-making of professional judges. The system scores rounds with accuracy within the range of professional judges. This contributes a consistent, transparent, bias-free, and scalable scoring standard for a sport with highly subjective criteria and a long history of controversy. A multilayer perceptron was used as an alternative approach to modeling, achieving comparable accuracy but lacking interpretability.<br><br>
 
                         Both models learn to map stats output by a <a href="https://jabbr.ai/deepstrike" target="_blank">computer vision system</a> onto judges’ scores. They are trained and evaluated on a database we assembled comprising 7,323 rounds of professional boxing. We perform feature selection (L1 logistic regression), correlation analysis, and analysis of learned weights to identify what performance factors matter most to judges. We evaluate of top judges and quantify their stylistic differences.<br><br>
 
-                        Selected as a finalist for the 2026 MIT Sloan Sports Analytics Conference Research Paper Competition. 1 of 7 papers selected from a pool of 197 submissions (~3.5% acceptance rate). Presented the work at the conference in a 15-minute talk.<br><br>
+                        Finalist for the 2026 MIT Sloan Sports Analytics Conference Research Paper Competition. 1 of 7 papers selected from a pool of 197 submissions (~3.5% acceptance rate). Presented the work at the conference in a 15-minute talk.<br><br>
                     </p>
                     <div class="project-figure">
                         <img src="aiJudge.png" alt="AI Judge">
                     </div>
                     <div class="project-links">
+                        <a href="https://www.youtube.com/watch?v=v9RRkwaDtQE" target="_blank" class="project-link">Video</a>
                         <a href="https://www.sloansportsconference.com/research-papers/interpretable-prediction-and-large-scale-analysis-of-judging-in-professional-boxing" target="_blank" class="project-link">Paper</a>
-                        <a href="duBoefSSACSlides.pdf" target="_blank" class="project-link">Slides</a>
                         <a href="duBoefSSACPoster.pdf" target="_blank" class="project-link">Poster</a>
                         <a href="https://github.com/mduboef/Jabbr-AI-Boxing-Judging" target="_blank" class="project-link">GitHub</a>
                     </div>
@@ -864,15 +867,13 @@
                 <div class="project-card">
                     <h3 class="project-title">NYC Subway Challenge</h3>
                     <div class="project-tech">
+                        <span class="tech-tag">Hierarchical Reinforcement Learning</span>
                         <span class="tech-tag">Path Finding</span>
-                        <span class="tech-tag">Reinforcement Learning</span>
-                        <span class="tech-tag">Clustering</span>
-                        <span class="tech-tag">Webscraping</span>
                     </div>
                     <p class="project-description">
                         Attempting the find the fastest possible route through all 472 NYC subway stations. In essence, this is a minimum spanning walk problem with a relatively sparse graph of 472 nodes.<br><br>
                         This is a long-time project that has grown with me through my undergraduate and graduate career, serving as a great excuse to implement new algorithms and approaches I encounter. I started pursuing this in 2019 at RPI. I led a team of 12 student contributors over 3 semesters at the <a href="https://new.rcos.io/" target="_blank">Rensselaer Center for Open Source (RCOS)</a>. We built a model of the subway and experimented with different classical algorithmic approaches (no learning).<br><br>
-                        At UMass I have reformulated the project, taking an RL-based approach. I use a betweenness clustering to break the subway system into a hierarchical MDP. I apply value iteration to find a near-optimal policy for traversing the subway system.<br><br>Shout out to my buddy <a href="https://www.linkedin.com/in/sivaraaman-balakrishnan/" target="_blank">Siva</a> for these visualizations!
+                        At UMass I have reformulated the project, taking an RL-based approach. I used betweenness clustering to break the subway system into a hierarchical MDP. I applied value iteration to find a near-optimal policy for traversing the subway system.<br><br>Shout out to my buddy <a href="https://www.linkedin.com/in/sivaraaman-balakrishnan/" target="_blank">Siva</a> for these visualizations!
                     <div class="project-figure medium">
                         <img src="originalSubway.png" alt="Original subway map">
                         <img src="clusteredSubway.png" alt="Clustered subway map">
@@ -880,6 +881,29 @@
                     <div class="project-links">
                         <a href="subwayRLChallenge.pdf" target="_blank" class="project-link">Write-up</a>
                         <a href="https://github.com/mduboef/subwayChallengeRL" target="_blank" class="project-link">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Algorithmic Fair Allocation for Food Rescue</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Computational Social Choice</span>
+                        <span class="tech-tag">Optimization</span>
+                        <span class="tech-tag">Simulation</span>
+                        <span class="tech-tag">Theory</span>
+
+                    </div>
+                    <p class="project-description">
+                        Pursued as part of the <a href="https://people.cs.umass.edu/~yzick/people.html" target="_blank">Fair and Explainable Decision Making (FED) lab</a> alongside <a href="https://cheerstopaula.github.io/site/home.html" target="_blank">Paula Navarrete Diaz</a>.<br><br>
+                        Automated dispatch solution for <a href="https://feedwma.org/" target="_blank">Rachel’s Table</a>, a food rescue delivering 50k meals per month in Western MA. Automated tool creates scheduled routes for Rachel's Table volunteer drivers, who pick up excess food from donors (ex. restaurants, grocery stores) and deliver it to receiving agencies (ex. food pantries).<br><br>
+                        Integer linear program, optimized routing to maximize fairness and efficiency, with food allocated to agencies based on their size, while also favoring a balanced distribution of food types and dealing with the stochastic nature of food availability.<br><br>
+                    </p>
+                    <div class="project-figure">
+                        <img src="rtAllocation.png" alt="Food rescue allocation">
+                    </div>
+                    <div class="project-links">
+                        <a href="rtWriteup.pdf" target="_blank" class="project-link">Write-up</a>
+                        <a href="rtSlides.pdf" target="_blank" class="project-link">Slides</a>
                     </div>
                 </div>
 
@@ -904,28 +928,7 @@
                 </div>
 
 
-                <div class="project-card">
-                    <h3 class="project-title">Algorithmic Fair Allocation for Food Rescue</h3>
-                    <div class="project-tech">
-                        <span class="tech-tag">Computational Social Choice</span>
-                        <span class="tech-tag">Optimization</span>
-                        <span class="tech-tag">Simulation</span>
-                        <span class="tech-tag">Theory</span>
 
-                    </div>
-                    <p class="project-description">
-                        Pursued as part of the <a href="https://people.cs.umass.edu/~yzick/people.html" target="_blank">Fair and Explainable Decision Making (FED) lab</a> alongside <a href="https://cheerstopaula.github.io/site/home.html" target="_blank">Paula Navarrete Diaz</a>.<br><br>
-                        Automated dispatch solution for <a href="https://feedwma.org/" target="_blank">Rachel’s Table</a>, a food rescue delivering 50k meals per month in Western MA. Automated tool creates scheduled routes for Rachel's Table volunteer drivers, who pick up excess food from donors (ex. restaurants, grocery stores) and deliver it to receiving agencies (ex. food pantries).<br><br>
-                        Integer linear program, optimized routing to maximize fairness and efficiency, with food allocated to agencies based on their size, while also favoring a balanced distribution of food types and dealing with the stochastic nature of food availability.<br><br>
-                    </p>
-                    <div class="project-figure">
-                        <img src="rtAllocation.png" alt="Food rescue allocation">
-                    </div>
-                    <div class="project-links">
-                        <a href="rtWriteup.pdf" target="_blank" class="project-link">Write-up</a>
-                        <a href="rtSlides.pdf" target="_blank" class="project-link">Slides</a>
-                    </div>
-                </div>
 
 
                 <div class="project-card">
@@ -967,7 +970,6 @@
                         <span class="tech-tag">Circuit Design</span>
                         <span class="tech-tag">Arduino</span>
                         <span class="tech-tag">Android</span>
-                        <span class="tech-tag">Kotlin</span>
                     </div>
                     <p class="project-description">
                         A really cool accessibility project I was able to contribute to under the supervision of <a href="https://sites.google.com/view/mallorygaspard/home" target="_blank">Mallory Gaspard</a> at the <a href="https://new.rcos.io/" target="_blank">Rensselaer Center for Open Source (RCOS)</a>. An embedded device allows disabled students to open doors remotely via a mobile app.<br><br>
@@ -985,7 +987,7 @@
                         <span class="tech-tag">Web Development</span>
                     </div>
                     <p class="project-description">
-                        Willow is a web app used to build and assign truth trees. It is largely used in an education context to teach formal logic.<br><br>
+                        Willow is a web app for creating and validating truth trees. It is largely used in an education context to teach first order logic.<br><br>
                         I extended Willow, enabling support for Davis-Putnam type logic problems. This was done under Prof. Bram Van Heuveln at RPI.
                     </p>
                     <div class="project-links">
