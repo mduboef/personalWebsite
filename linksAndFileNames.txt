@@ -1,0 +1,40 @@
+Links & images for the projects
+
+Boxing AI
+    image already done
+    Conf paper - duBoefSSACPaper.pdf
+    Conf slides - duBoefSSACSlides.pdf
+    Conf poster - duBoefSSACPoster.pdf
+    GitHub Repo - https://github.com/mduboef/Jabbr-AI-Boxing-Judging
+
+NYC Subway Challenge
+    Two image on top of one another, originalSubway.png and clusteredSubway.png
+    Write up - subwayRLChallenge.pdf
+    GitHub Repo - https://github.com/mduboef/subwayChallengeRL
+
+Food Rescue
+    Image - rtAllocation.png
+    Write Up - rtWriteup.pdf
+    Slides - rtSlides.pdf
+
+Have I Been Gerrymandered?
+    No image
+    Website - (Need to be relaunched)
+    Slides - gerrymanderSlides.pdf
+    GitHub Repo - https://github.com/orgs/Have-I-Been-Gerrymandered/repositories
+
+Automatic Door Control
+    image adcCircuit.png
+    GitHub Repo - https://github.com/AutomaticDoorControl/AutoDoorCtrlArduino
+
+OPRA
+    GitHub Repo - https://github.com/mduboef/opraMatching
+
+Willow
+    Website - https://willow.bram-hub.com/
+    GitHub Repo - https://github.com/Bram-Hub/Willow
+
+Subway Tolling
+    Write up - tollingPaper.pdf
+    Slides - tollingSlides.pdf
+    GitHub Repo - https://github.com/mduboef/subwayTollSim
